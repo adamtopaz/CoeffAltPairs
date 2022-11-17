@@ -1,0 +1,153 @@
+\documentclass[12pt]{amsart}
+
+\title{Alternating pairs with coefficients}
+\author{Adam Topaz}
+\date{Last updated: \today}
+
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{microtype}
+
+\newcommand{\HH}{\operatorname{H}}
+\newcommand{\Qbb}{\mathbb{Q}}
+\newcommand{\Cbb}{\mathbb{C}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Dcal}{\mathcal{D}}
+\newcommand{\Ical}{\mathcal{I}}
+\newcommand{\smin}{\smallsetminus}
+\newcommand{\Pbb}{\mathbb{P}}
+\newcommand{\Abb}{\mathbb{A}}
+\newcommand{\Zbb}{\mathbb{Z}}
+\newcommand{\mfrak}{\mathfrak{m}}
+\newcommand{\Ocal}{\mathcal{O}}
+\newcommand{\Hcal}{\mathcal{H}}
+\renewcommand{\tilde}{\widetilde}
+
+\newtheorem{maintheorem}{Theorem}
+\renewcommand*{\themaintheorem}{\Alph{maintheorem}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  We prove a variant of the fundamental theorem of alternating pairs which works for arbitrary fields of positive characteristic $p$ and arbitrary coefficient fields of characteristic not dividing $2 \cdot p$.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+Most results in anabelian geometry have a \emph{local step} where the goal is to detect local information using the given data, which is usually of Galois-theoretic or cohomological nature.
+In birational contexts, this local data usually refers to structures arising from \emph{valuations} on the field(s) in question.
+
+Recently, these techniques have been applied by the author in \emph{motivic} contexts.
+For example, in~\cite{https://doi.org/10.48550/arxiv.1705.01084} it was shown that the \emph{generic Betti cohomology ring} $\HH^{*}(K|k,\Qbb(*))$ of a higher-dimensional function field over an algebraically closed subfield $k \subset \Cbb$, endowed with its natural mixed Hodge structure in degree one, completely determines the fields $K|k$.
+An \emph{integral} $\ell$-adic analogue of this was also obtained in~\cite{https://doi.org/10.48550/arxiv.1910.03563}.
+
+In both of these cases, detecting the valuations of the function field in question was the key first step, and the essential tool used to accomplish this was the so-called \emph{fundamental theorem of alternating pairs}.
+Variants of this result have appeared several times in the literature (albeit with slightly different names), in the work of Bogomolov~\cite{zbMATH00124400}, Bogomolov-Tschinkel~\cite{zbMATH02078165}, Efrat~\cite{zbMATH01489500}, Koenigsmann~\cite{zbMATH00785379}, Engler-Koenigsmann~\cite{zbMATH01135369}, and the author~\cite{zbMATH06778776,https://doi.org/10.48550/arxiv.1705.01084}.
+
+However, the one thing that all of these results have in common is that the coefficient ring used must, in some sense, be \emph{prime}.
+This is well-suited for contexts arising from Galois theory, where one can essentially work with Galois cohomology $\HH^{*}(K,\Zbb/\ell^{n})$ or $\HH^{*}(K,\Zbb_{\ell})$.
+Similarly, in the context of generic Betti-cohomology $\HH^{*}(K|k,\Qbb(*))$ mentioned above, the coefficient ring is $\Qbb$ and thus the results apply.
+
+On the other hand, in order to obtain a more complete \emph{motivic} picture, it is desirable to consider objects constructed using \emph{crystalline cohomology}, or, since we wish to eventually work with nonproper varieties, using rather \emph{rigid cohomology}.
+The function fields in question here are regular finitely generated fields over perfect fields $k$ of positive characteristic $p$, while the coefficient ring is the fraction field $F$ of the $p$-typical Witt vectors $W(k)$ of $k$.
+Unfortunately, such an $F$ is usually far from being prime and thus the results used above no longer apply directly!
+
+In this short note, we overcome this hurdle by proving a variant of the fundamental theorem of alternating pairs which is applicable to contexts arising from rigid cohomology as discussed above.
+We do intend to apply this result as an initial step in studying the anabelian properties of generic rigid cohomology.
+However, the theorem we present here involves only elementary objects and may be of independent interest, so we defer the discussion of these applications to future work.
+
+Our main result is formulated as follows.
+
+\begin{maintheorem}\label{maintheorem}
+  Let $K$ and $F$ be two fields.
+  Assume that $K$ has positive characteristic $p$, that the characteristic of $F$ does not divide $2 \cdot p$.
+  Let $\Dcal$ be a subspace of $\Hom(K^{\times},F)$, which is closed in the weak topology, where $F$ is considered as being discrete.
+  Assume that for all $f,g \in \Dcal$, and all $x,y \in K^{\times}$ such that $x + y = 1$, one has
+  \[ f(x) \cdot g(y) = f(y) \cdot g(x). \]
+  Then there exists a valuation $v$ of $K$ such that one has
+  \[ \Dcal \subset \Hom(K^{\times}/(1+\mfrak_{v}),F) \subset \Hom(K^{\times},F) \]
+  and, setting $\Ical := \Hom(K^{\times}/\Ocal_{v}^{\times},F) \subset \Hom(K^{\times},F)$, the intersection $\Dcal \cap \Ical$ in $\Hom(K^{\times},F)$ has codimension $\le 1$ in $\Dcal$.
+\end{maintheorem}
+
+The main novelty in this theorem, at least in comparison with its predecessors, is in the rather weak assumptions on the field $F$.
+However, this comes at the expense of imposing an additional assumption on $K$.
+The proof of this result stemmed from a detailed investigation of the \emph{rational case}, as described in~\cite[\S A]{https://doi.org/10.48550/arxiv.1705.01084}.
+
+In fact, the proof of Theorem~\ref{maintheorem} has been formally verified using the \texttt{Lean3} interactive theorem prover~\cite{10.1007/978-3-319-21401-6_26} and its mathematics library \texttt{mathlib}~\cite{10.1145/3372885.3373824}.
+The formally verified proof of Theorem~\ref{maintheorem} can be found in~\cite{lean-acl-pairs}, specifically in the file \href{https://github.com/adamtopaz/lean-acl-pairs/blob/6ac31d86ca2739b6c18d3f05b7007e720f66299f/src/main_theorem_char.lean}{\texttt{src/main\_theorem\_char.lean}} from commit \href{https://github.com/adamtopaz/lean-acl-pairs/tree/6ac31d86ca2739b6c18d3f05b7007e720f66299f}{\texttt{6ac31d8}} which is the most recent one on the master branch at the time this note was written.
+The converse of this theorem is valid in full generality with no further assumptions on $K$ and/or $F$, and a formal proof of this converse can also be found in the repository mentioned above.
+
+We give an indication of the argument in the next section, explaining only the key ideas.
+We refer the reader to the formally verified proof for all the remaining details.
+
+\section{A sketch of the proof}
+
+The argument proceeds similarly to the proof of~\cite[Theorem~A.3]{https://doi.org/10.48550/arxiv.1705.01084}.
+Namely, we proceed by contradiction, which is obtained by carrying out some explicit calculations in a certain projective space.
+The argument here differs precisely at the point where one obtains the desired contradiction.
+
+Let $\Dcal$ be as in the statement of the theorem and put $T := \Dcal^{\perp}$, the orthogonal of $\Dcal$ with respect to the pairing
+\[ K^{\times} \times \Hom(K^{\times},F) \to F. \]
+Let $H$ denote the subgroup of $K^{\times}$ which is generated by $T$ and all $x \in K^{\times} \smin H$ such that $1 + x \notin T \cup x \cdot T$.
+By~\cite[Theorem 2.16]{zbMATH04023378}, there exists a valuation $v$ of $K$ and a subgroup $\tilde H \subset K^{\times}$ containing $H$, such that $1 + \mfrak_{v} \subset T$, $\Ocal_{v}^{\times} \subset \tilde H$ and $[\tilde H : H] \le 2$.
+
+Letting $\Hcal \subset \Hom(K^{\times},F)$ denote the dual of $K^{\times}/\tilde H$, we must therefore show that $\Dcal/\Hcal$ has dimension $\le 1$.
+By the construction of $H$ and using the fact that $F$ has characteristic $\neq 2$, it suffices to show that for all $\Phi : K^{\times} \to F \times F$ of the form $\Phi = (f,g)$ for $f,g \in \Dcal$, and all $x,y \in K \smin \{0,-1\}$ such that $\Phi(1+x) \notin \{\Phi(1),\Phi(x)\}$ and $\Phi(1+y) \notin \{\Phi(1),\Phi(y)\}$, the pair $\Phi(x)$ and $\Phi(y)$ is \emph{linearly dependent} over $F$.
+
+Assume this is not the case, and let $\Phi = (f,g)$, $f,g \in \Dcal$ and $x,y$ witness this.
+Thus, $\Phi(x)$ and $\Phi(y)$ are \emph{linearly independent} while $\Phi(1+x) \notin \{\Phi(1),\Phi(x)\}$ and $\Phi(y) \notin \{\Phi(1),\Phi(y)\}$.
+Note that the condition on $\Dcal$ ensures that $\Phi(a+b),\Phi(a),\Phi(b)$ are colinear (in the affine sense) whenever $a,b,a+b \in K^{\times}$.
+
+Embed $F \times F = \Abb^{2}(F)$ into $\Pbb^{2}(F)$ in the usual way, and compose
+\[ K^{\times} \xrightarrow{\Phi} F\times F = \Abb^{2}(F) \hookrightarrow \Pbb^{2}(F) \]
+with an projective-$F$-linear automorphism of $\Pbb^{2}(F)$ to obtain
+\[ \Psi : K^{\times} \to \Pbb^{2}(F) \]
+satisfying the following conditions (using homogeneous coordinates):
+\begin{enumerate}
+  \item $\Psi(1) = (1:0:0)$; $\Psi(x) = (1:1:0)$; $\Psi(y) = (1:0:1)$.
+  \item $\Psi(1+x) = (0:1:0)$; $\Psi(1+y) = (0:0:1)$.
+  \item $\Psi(a+b),\Psi(a),\Psi(b)$ are colinear whenever $a,b,a+b \in K^{\times}$.
+\end{enumerate}
+The crux of the argument is to show that for all natural numbers $m$, one has
+\begin{align}\label{keyeqn}
+\Psi(m + (m+1) \cdot x) = (1:(m+1):0).
+\end{align}
+Here one argues similarly to Step~4 in the proof of~\cite[Theorem A.3]{https://doi.org/10.48550/arxiv.1705.01084}.
+This suffices to obtain our desired contradiction by taking $m = p$ to be the characteristic of $K$, since that would imply that
+\[ (1:1:0) = \Psi(x) = (p + (p+1) \cdot x) = (1:p+1:0) \]
+hence $p = 0$ in $F$, which contradicts the hypothesis on $F$.
+Again, we remark that this is precisely the point where the our argument differs from that of~\cite[Theorem A.3]{https://doi.org/10.48550/arxiv.1705.01084}, where a contradiction is obtained in a different way.
+
+Here is a sketch of the proof of~\eqref{keyeqn}.
+First, use the fact that
+\[ 1+x+y = (1+x) + y = (1+y) + x \]
+along with condition (3) to see that $\Psi(1+x+y) = (1:1:1)$.
+Next, use the fact that
+\[ 2+x+y = (1+x) + (1+y) = 1+(1+x+y) \]
+along with condition (3) to see that $\Psi(2+x+y) = (0:1:1)$.
+Finally, we show by induction on $m$ that
+\[ \Psi((m+1)+(m+1) \cdot x + y) = (1:m+1:1) \]
+and
+\[ \Psi(m+(m+1) \cdot x) = (1:m+1:0). \]
+
+The base case $m = 0$ follows from the above.
+For the inductive case, we use condition (3), the inductive hypothesis and the equation
+\begin{align*}
+  (m+2)+(m+2) \cdot x + y &= (m+(m+1) \cdot x + y)+(2+x+y)  \\
+                          &= ((m+1)+(m+1) \cdot x + y) + (1+x)
+\end{align*}
+to find $\Psi((m+2)+(m+2) \cdot x + y) = (1:m+2:1)$.
+Conclude by using condition (3), the calculation above, the inductive hypothesis, and the equation
+\begin{align*}
+  (m+1) + (m+2) \cdot x &= ((m+2)+(m+2) \cdot x + y) - (1+y) \\
+                        &= (m + (m+1) \cdot x) + (1 + x).
+\end{align*}
+
+\bibliographystyle{amsplain}
+\bibliography{refs}
+
+\end{document}
