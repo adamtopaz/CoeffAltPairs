@@ -87,14 +87,14 @@ Our main result is formulated as follows.
 
 The main novelty in this theorem, at least in comparison with its predecessors, is in the rather weak assumptions on the field $F$.
 However, this comes at the expense of imposing an additional assumption on $K$.
+
 The proof of this result stemmed from a detailed investigation of the \emph{rational case}, as described in~\cite[\S A]{https://doi.org/10.48550/arxiv.1705.01084}.
-
 In fact, the proof of Theorem~\ref{maintheorem} has been formally verified using the \texttt{Lean3} interactive theorem prover~\cite{10.1007/978-3-319-21401-6_26} and its mathematics library \texttt{mathlib}~\cite{10.1145/3372885.3373824}.
-The formally verified proof of Theorem~\ref{maintheorem} can be found in~\cite{lean-acl-pairs}, specifically in the file \href{https://github.com/adamtopaz/lean-acl-pairs/blob/6ac31d86ca2739b6c18d3f05b7007e720f66299f/src/main_theorem_char.lean}{\texttt{src/main\_theorem\_char.lean}} from commit \href{https://github.com/adamtopaz/lean-acl-pairs/tree/6ac31d86ca2739b6c18d3f05b7007e720f66299f}{\texttt{6ac31d8}} which is the most recent one on the master branch at the time this note was written.
-The converse of this theorem is valid in full generality with no further assumptions on $K$ and/or $F$, and a formal proof of this converse can also be found in the repository mentioned above.
+The formally verified proof of Theorem~\ref{maintheorem} can be found in~\cite{lean-acl-pairs}, specifically in the file \href{https://github.com/adamtopaz/lean-acl-pairs/blob/dcf56cd/src/main_theorem_char.lean}{\texttt{src/main\_theorem\_char.lean}} from commit \href{https://github.com/adamtopaz/lean-acl-pairs/tree/dcf56cd}{\texttt{dcf56cd}} which is the most recent one on the master branch at the time this note was written.
+The converse of this theorem is valid in full generality with no further assumptions on $K$ and/or $F$, and a formal proof of this converse can also be found in the repository mentioned above in the file \href{https://github.com/adamtopaz/lean-acl-pairs/blob/dcf56cd/src/main_converse.lean}{\texttt{src/main\_converse.lean}}.
 
-We give an indication of the argument in the next section, explaining only the key ideas.
-We refer the reader to the formally verified proof for all the remaining details.
+We discuss the proof of Theorem~\ref{maintheorem} in the next section, focusing on the key ideas.
+The reader may wish to consult the formally verified proof in~\cite{lean-acl-pairs}, where all details can be found.
 
 \section{A sketch of the proof}
 
